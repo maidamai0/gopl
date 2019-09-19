@@ -1,1 +1,1 @@
-# Excise code of **The Go Programming Language**
+# Execise code of [The Go Programming Language](https://www.gopl.io/)
