@@ -1,0 +1,8 @@
+hello
+world
+from
+text
+repeat
+hello
+world
+goodbye
