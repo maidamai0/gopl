@@ -11,7 +11,7 @@
             "mode": "auto",
             "program": "${file}",
             "env": {},
-            "args": []
+            "args": ["1.3dup3_test.txt" ,"1.3dup3_test1.txt", "1.3dup3_test2.txt"]
         }
     ]
 }
