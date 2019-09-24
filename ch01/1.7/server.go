@@ -7,6 +7,7 @@ import (
 	"image/color"
 	"image/gif"
 	"io"
+	"io/ioutil"
 	"log"
 	"math"
 	"net/http"
@@ -66,10 +67,21 @@ func handlerRicher(w http.ResponseWriter, req *http.Request) {
 		fmt.Fprintf(w, "Form[%q] = %q\n", k, v)
 	}
 
-	decoder := json.NewDecoder(req.Body)
-	var reqBody string
-	decoder.Decode(&reqBody)
-	fmt.Fprintf(w, "Body = %q\n", reqBody)
+	var parsed map[string]interface{}
+
+	b, err := ioutil.ReadAll(req.Body)
+	if err != nil {
+		log.Fatal("read request err:", err)
+	}
+	if json.Unmarshal(b, &parsed) != nil {
+		log.Fatal("parse josn err:", err)
+	}
+
+	fmt.Fprintf(w, "Body = {\n")
+	for k, v := range parsed {
+		fmt.Fprintf(w, "%q:%q\n", k, v)
+	}
+	fmt.Fprintf(w, "}\n")
 }
 
 func handlerLassajous(w http.ResponseWriter, req *http.Request) {
